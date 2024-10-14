@@ -9,7 +9,7 @@ export async function GET() {
     const data = await fs.readFile(dataFilePath, 'utf8');
     return NextResponse.json(JSON.parse(data));
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to read calendar data' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to read calendar data', errorMessage: error }, { status: 500 });
   }
 }
 
@@ -19,7 +19,7 @@ export async function PUT(request: Request) {
     await fs.writeFile(dataFilePath, JSON.stringify(newData, null, 2));
     return NextResponse.json({ message: 'Calendar data updated successfully' });
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to update calendar data' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to update calendar data', errorMessage: error }, { status: 500 });
   }
 }
 
